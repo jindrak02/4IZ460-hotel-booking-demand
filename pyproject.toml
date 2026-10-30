@@ -4,4 +4,6 @@ version = "0.1.0"
 description = "Analysis of cancelled hotel bookings (Hotel Booking Demand) using interpretable methods – semester project for 4IZ457, Prague University of Economics and Business"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "pandas>=3.1.0",
+]
