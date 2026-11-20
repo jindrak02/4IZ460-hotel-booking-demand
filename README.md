@@ -4,8 +4,18 @@ Semester project for the course **4IZ457 – Interpretable Methods** (Prague Uni
 
 ## Project goal
 
-The goal is to identify characteristics and patterns associated with **cancelled hotel bookings**
-using interpretable data analysis methods.
+The goal is to find out what characterises bookings with a **high share of cancellations**
+(market segment, distribution channel, deposit type, lead time between booking and arrival,
+season, customer type) and how these patterns **differ between the city hotel and the resort
+hotel**.
+
+**Main segmentation:**
+
+- City Hotel
+- Resort Hotel
+
+**Practical benefit:** the results can help reservation managers identify segments with a higher
+share of cancelled bookings and support capacity planning.
 
 Planned methods:
 
