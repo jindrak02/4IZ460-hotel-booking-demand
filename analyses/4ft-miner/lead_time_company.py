@@ -24,7 +24,7 @@ from pathlib import Path
 import pandas as pd
 from cleverminer import cleverminer
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parents[2]
 DATA_PATH = ROOT / "data" / "processed" / "hotel_bookings_categorized.csv"
 
 # Attributes used by the task
