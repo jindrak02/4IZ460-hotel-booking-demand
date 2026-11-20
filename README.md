@@ -50,13 +50,21 @@ without downloading it manually.
 │   ├── raw/          # original, unmodified dataset
 │   └── processed/    # shared prepared data for all analyses
 ├── scripts/          # data preparation and transformation scripts
-├── analyses/         # individual analytical tasks
+├── analyses/         # individual analytical tasks, one folder per method
+│   ├── 4ft-miner/
+│   ├── sd4ft-miner/
+│   ├── cf-miner/
+│   └── contingency-tables/
 ├── reports/          # interim and final project presentations
 ├── pyproject.toml    # project metadata and dependency list
 ├── .python-version   # Python version for uv (3.12)
 ├── .gitignore
 └── README.md
 ```
+
+Each analysis lives in the folder of its method and is named after its topic
+(e.g. `analyses/sd4ft-miner/city_vs_resort_cancellations.ipynb`). Analyses only read the
+prepared data from `data/processed/`; notebooks load it via `../../data/processed/...`.
 
 ## Local setup
 
