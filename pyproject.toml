@@ -7,6 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "cleverminer>=1.2.8",
     "pandas>=3.1.0",
+    "scikit-learn>=1.9.1",
 ]
 
 [dependency-groups]
