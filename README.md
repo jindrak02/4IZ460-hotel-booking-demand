@@ -23,9 +23,10 @@ Planned methods:
 - SD4ft-Miner
 - CF-Miner
 - Contingency tables
-- Further interpretable methods in later project phases
+- Explainable AI on a shared Random Forest model (PFI, ALE, SHAP, ...)
 
-Analyses are implemented in Python, primarily with the [CleverMiner](https://pypi.org/project/cleverminer/) library.
+Analyses are implemented in Python, primarily with the [CleverMiner](https://pypi.org/project/cleverminer/) library
+(first part) and [scikit-learn](https://scikit-learn.org/) (second part).
 
 ## Dataset
 
@@ -54,7 +55,9 @@ without downloading it manually.
 │   ├── 4ft-miner/
 │   ├── sd4ft-miner/
 │   ├── cf-miner/
-│   └── contingency-tables/
+│   ├── contingency-tables/
+│   └── xai/          # second part: explainable AI on one shared model
+│       └── models/   # shared Random Forest (rf_model.ipynb) and its checks
 ├── reports/          # interim and final project presentations
 ├── pyproject.toml    # project metadata and dependency list
 ├── .python-version   # Python version for uv (3.12)
@@ -65,6 +68,24 @@ without downloading it manually.
 Each analysis lives in the folder of its method and is named after its topic
 (e.g. `analyses/sd4ft-miner/city_vs_resort_cancellations.ipynb`). Analyses only read the
 prepared data from `data/processed/`; notebooks load it via `../../data/processed/...`.
+
+### XAI tasks: shared Random Forest model
+
+All tasks of the second part explain the same model, `analyses/xai/models/rf_model.ipynb`
+(features, leakage decisions, group train/test split, encoding and model quality are documented there;
+supporting checks are in `analyses/xai/models/model_checks.ipynb`).
+
+1. Put your notebook into its own folder directly under `analyses/xai/`
+   (e.g. `analyses/xai/shap/cancellation_drivers.ipynb`) – the relative paths only work at this depth.
+2. Load the model in the first cells:
+
+   ```python
+   %run ../models/rf_model.ipynb
+   ```
+
+   This retrains the model deterministically (about 20 s) and provides `pipeline`, `X_train`, `X_test`,
+   `y_train`, `y_test`, `df`, `FEATURES` and more – see the table at the top of `rf_model.ipynb`.
+   Do not modify these variables.
 
 ## Local setup
 
