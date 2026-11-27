@@ -1,0 +1,174 @@
+{
+  "description": "Shared Random Forest predicting hotel booking cancellation (is_canceled).",
+  "generated_by": "models/train_cancellation_rf.py",
+  "source_data": "data/processed/hotel_bookings_clean.csv",
+  "target": "is_canceled",
+  "positive_class": "1 = booking canceled",
+  "categorical_features": [
+    "hotel",
+    "meal",
+    "market_segment",
+    "distribution_channel",
+    "reserved_room_type",
+    "deposit_type",
+    "customer_type"
+  ],
+  "numeric_features": [
+    "lead_time",
+    "arrival_month",
+    "total_nights",
+    "adults",
+    "children",
+    "babies",
+    "is_repeated_guest",
+    "previous_cancellations",
+    "previous_bookings_not_canceled",
+    "days_in_waiting_list",
+    "adr",
+    "total_of_special_requests",
+    "has_agent",
+    "has_company"
+  ],
+  "encoded_feature_names": [
+    "hotel_City Hotel",
+    "hotel_Resort Hotel",
+    "meal_BB",
+    "meal_FB",
+    "meal_HB",
+    "meal_SC",
+    "market_segment_Aviation",
+    "market_segment_Complementary",
+    "market_segment_Corporate",
+    "market_segment_Direct",
+    "market_segment_Groups",
+    "market_segment_Offline TA/TO",
+    "market_segment_Online TA",
+    "distribution_channel_Corporate",
+    "distribution_channel_Direct",
+    "distribution_channel_GDS",
+    "distribution_channel_TA/TO",
+    "reserved_room_type_A",
+    "reserved_room_type_B",
+    "reserved_room_type_C",
+    "reserved_room_type_D",
+    "reserved_room_type_E",
+    "reserved_room_type_F",
+    "reserved_room_type_G",
+    "reserved_room_type_H",
+    "reserved_room_type_L",
+    "deposit_type_No Deposit",
+    "deposit_type_Non Refund",
+    "deposit_type_Refundable",
+    "customer_type_Contract",
+    "customer_type_Group",
+    "customer_type_Transient",
+    "customer_type_Transient-Party",
+    "lead_time",
+    "arrival_month",
+    "total_nights",
+    "adults",
+    "children",
+    "babies",
+    "is_repeated_guest",
+    "previous_cancellations",
+    "previous_bookings_not_canceled",
+    "days_in_waiting_list",
+    "adr",
+    "total_of_special_requests",
+    "has_agent",
+    "has_company"
+  ],
+  "excluded_columns": {
+    "required_car_parking_spaces": "leakage: no booking with a parking space is ever canceled (recorded on arrival)",
+    "country": "artefact: country is verified only at check-in, so canceled bookings keep the default PRT",
+    "assigned_room_type": "post-booking information (known only at arrival)",
+    "booking_changes": "post-booking information (changes accumulate until arrival)",
+    "arrival_date_year": "time trend; 2015 and 2017 are incomplete years, does not generalise",
+    "agent": "high-cardinality id (333 values); replaced by has_agent",
+    "company": "high-cardinality id (347 values); replaced by has_company",
+    "arrival_date_month": "redundant date column; replaced by numeric arrival_month",
+    "arrival_date_week_number": "redundant with arrival_month",
+    "arrival_date_day_of_month": "redundant date column, no seasonal meaning",
+    "arrival_date": "redundant date column",
+    "stays_in_weekend_nights": "redundant with total_nights",
+    "stays_in_week_nights": "redundant with total_nights",
+    "total_guests": "redundant with adults + children + babies"
+  },
+  "split": {
+    "method": "stratified by hotel x is_canceled",
+    "test_size": 0.2,
+    "random_state": 42,
+    "n_train": 94846,
+    "n_test": 23712,
+    "cancel_rate_train": 0.3726,
+    "cancel_rate_test": 0.3726
+  },
+  "model": {
+    "class": "sklearn RandomForestClassifier",
+    "params": {
+      "n_estimators": 300,
+      "max_features": "sqrt",
+      "min_samples_leaf": 5,
+      "oob_score": true,
+      "n_jobs": -1,
+      "random_state": 42
+    }
+  },
+  "metrics": {
+    "test": {
+      "roc_auc": 0.9029,
+      "accuracy": 0.8329,
+      "precision": 0.8613,
+      "recall": 0.6572,
+      "f1": 0.7456,
+      "log_loss": 0.3718,
+      "brier": 0.1181,
+      "confusion_matrix": {
+        "tn": 13943,
+        "fp": 935,
+        "fn": 3028,
+        "tp": 5806
+      }
+    },
+    "test_by_hotel": {
+      "City Hotel": {
+        "roc_auc": 0.9123,
+        "accuracy": 0.836,
+        "precision": 0.8758,
+        "recall": 0.7093,
+        "f1": 0.7838,
+        "log_loss": 0.3641,
+        "brier": 0.1159,
+        "confusion_matrix": {
+          "tn": 8502,
+          "fp": 665,
+          "fn": 1922,
+          "tp": 4690
+        }
+      },
+      "Resort Hotel": {
+        "roc_auc": 0.8742,
+        "accuracy": 0.8265,
+        "precision": 0.8052,
+        "recall": 0.5023,
+        "f1": 0.6186,
+        "log_loss": 0.387,
+        "brier": 0.1224,
+        "confusion_matrix": {
+          "tn": 5441,
+          "fp": 270,
+          "fn": 1106,
+          "tp": 1116
+        }
+      }
+    },
+    "train_oob_accuracy": 0.8324,
+    "train_oob_roc_auc": 0.901
+  },
+  "versions": {
+    "python": "3.12.16",
+    "scikit-learn": "1.9.1",
+    "pandas": "3.1.0",
+    "joblib": "1.6.0"
+  }
+}

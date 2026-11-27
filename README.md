@@ -23,9 +23,12 @@ Planned methods:
 - SD4ft-Miner
 - CF-Miner
 - Contingency tables
+- XAI methods (PFI, ICE, ALE, ...) on top of one shared Random Forest model
 - Further interpretable methods in later project phases
 
 Analyses are implemented in Python, primarily with the [CleverMiner](https://pypi.org/project/cleverminer/) library.
+The shared model is built with [scikit-learn](https://scikit-learn.org/). Its features, train/test split
+and usage are described in [`models/README.md`](models/README.md).
 
 ## Dataset
 
@@ -50,6 +53,9 @@ without downloading it manually.
 │   ├── raw/          # original, unmodified dataset
 │   └── processed/    # shared prepared data for all analyses
 ├── scripts/          # data preparation and transformation scripts
+├── models/           # shared ML model for XAI methods (see models/README.md)
+│   ├── train_cancellation_rf.py
+│   └── cancellation_rf/   # fitted model + fixed train/test split + metadata
 ├── analyses/         # individual analytical tasks, one folder per method
 │   ├── 4ft-miner/
 │   ├── sd4ft-miner/
@@ -65,6 +71,7 @@ without downloading it manually.
 Each analysis lives in the folder of its method and is named after its topic
 (e.g. `analyses/sd4ft-miner/city_vs_resort_cancellations.ipynb`). Analyses only read the
 prepared data from `data/processed/`; notebooks load it via `../../data/processed/...`.
+XAI analyses load the shared model and its test split via `../../models/cancellation_rf/...`.
 
 ## Local setup
 
